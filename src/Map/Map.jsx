@@ -61,9 +61,9 @@ const highlightRouteSegmentlayer = L.featureGroup()
 const highlightRouteIndexLayer = L.featureGroup()
 const excludePolygonsLayer = L.featureGroup()
 
-const centerCoords = process.env.REACT_APP_CENTER_COORDS.split(',')
+const centerCoords = [51.165691, 10.451526]
 let center = [parseFloat(centerCoords[0]), parseFloat(centerCoords[1])]
-let zoom_initial = 10
+let zoom_initial = 30
 
 if (localStorage.getItem('last_center')) {
   const last_center = JSON.parse(localStorage.getItem('last_center'))
