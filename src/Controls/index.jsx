@@ -75,7 +75,6 @@ class MainControl extends React.Component {
     }
 
     let activeTab
-    
     if (
       window.location.pathname === '/' ||
       window.location.pathname === '/directions'
