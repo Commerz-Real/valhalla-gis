@@ -211,49 +211,60 @@ class MainControl extends React.Component {
 
     return (
       <>
-        <Button
-          primary
+        <div
           style={{
             zIndex: 1001,
-            top: '10px',
-            left: '10px',
+            top: '0px',
+            left: '0px',
+            width: '140px',
+            height: '100vh',
             position: 'absolute',
-            width: '8.5rem',
-            texttransform: 'uppercase',
-            text: 'Erreichbarkeit',
+            backgroundColor: '#e8ebee',
           }}
-          onClick={this.handleDirectionsToggle}
         >
-          {'Erreichbarkeit'}
-        </Button>
-        <Button
-          primary
-          style={{
-            zIndex: 1001,
-            top: '60px',
-            left: '10px',
-            position: 'absolute',
-            width: '8.5rem',
-            text: 'Standort',
-          }}
-          onClick={this.handleDirectionsToggle}
-        >
-          {'Standort'}
-        </Button>
-        <Button
-          primary
-          style={{
-            zIndex: 1001,
-            top: '110px',
-            left: '10px',
-            position: 'absolute',
-            width: '8.5rem',
-            text: 'Empirica',
-          }}
-          onClick={this.handleDirectionsToggle}
-        >
-          {'Empirica'}
-        </Button>
+          <Button
+            primary
+            style={{
+              zIndex: 1002,
+              top: '10px',
+              left: '10px',
+              position: 'absolute',
+              width: '8.5rem',
+              fontSize: '1rem',
+            }}
+            onClick={this.handleDirectionsToggle}
+          >
+            {'Erreichbarkeit'}
+          </Button>
+          <Button
+            primary
+            style={{
+              zIndex: 1002,
+              top: '60px',
+              left: '10px',
+              position: 'absolute',
+              width: '8.5rem',
+              fontSize: '1rem',
+            }}
+            onClick={this.handleDirectionsToggle}
+          >
+            {'Standort'}
+          </Button>
+          <Button
+            primary
+            style={{
+              zIndex: 1002,
+              top: '110px',
+              left: '10px',
+              position: 'absolute',
+              width: '8.5rem',
+              fontSize: '1rem',
+            }}
+            onClick={this.handleDirectionsToggle}
+          >
+            {'Empirica'}
+          </Button>
+        </div>
 
         <Drawer
           enableOverlay={false}
@@ -263,7 +274,7 @@ class MainControl extends React.Component {
           style={{
             zIndex: 1000,
             overflow: 'auto',
-            marginLeft: '130px',
+            marginLeft: '140px',
           }}
         >
           <div>
