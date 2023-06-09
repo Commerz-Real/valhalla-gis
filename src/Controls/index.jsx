@@ -214,15 +214,47 @@ class MainControl extends React.Component {
         <Button
           primary
           style={{
-            zIndex: 998,
+            zIndex: 1001,
             top: '10px',
             left: '10px',
             position: 'absolute',
+            width: '8.5rem',
+            texttransform: 'uppercase',
+            text: 'Erreichbarkeit',
           }}
           onClick={this.handleDirectionsToggle}
         >
-          {activeTab === 0 ? 'Directions' : 'Isochrones'}
+          {'Erreichbarkeit'}
         </Button>
+        <Button
+          primary
+          style={{
+            zIndex: 1001,
+            top: '60px',
+            left: '10px',
+            position: 'absolute',
+            width: '8.5rem',
+            text: 'Standort',
+          }}
+          onClick={this.handleDirectionsToggle}
+        >
+          {'Standort'}
+        </Button>
+        <Button
+          primary
+          style={{
+            zIndex: 1001,
+            top: '110px',
+            left: '10px',
+            position: 'absolute',
+            width: '8.5rem',
+            text: 'Empirica',
+          }}
+          onClick={this.handleDirectionsToggle}
+        >
+          {'Empirica'}
+        </Button>
+
         <Drawer
           enableOverlay={false}
           open={this.props.showDirectionsPanel}
@@ -231,6 +263,7 @@ class MainControl extends React.Component {
           style={{
             zIndex: 1000,
             overflow: 'auto',
+            marginLeft: '130px',
           }}
         >
           <div>
