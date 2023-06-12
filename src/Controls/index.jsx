@@ -171,6 +171,7 @@ class MainControl extends React.Component {
     dispatch(toggleDirections())
   }
 
+  // Shows a toast to verify click on log in
   logInBtnClickes() {
     toast.success('Here you can log in to your account', {
       position: 'bottom-center',
@@ -182,6 +183,20 @@ class MainControl extends React.Component {
       progress: undefined,
       theme: 'light',
     })
+  }
+
+  // Handles click on Drawer item
+  // @Param: 0 = "Erreichbarkeit"; 1 = "Standort"; 2 = "Empirica"
+  drawItemClickHandler = (item) => {
+    switch (item) {
+      case 0:
+        this.handleDirectionsToggle()
+        break
+      case 1:
+        break
+      case 2:
+        break
+    }
   }
 
   render() {
@@ -256,7 +271,7 @@ class MainControl extends React.Component {
               width: '8.5rem',
               fontSize: '0.85rem',
             }}
-            onClick={this.handleDirectionsToggle}
+            onClick={() => this.drawItemClickHandler(0)}
           >
             {'Erreichbarkeit'}
           </Button>
@@ -270,7 +285,7 @@ class MainControl extends React.Component {
               width: '8.5rem',
               fontSize: '0.85rem',
             }}
-            onClick={this.handleDirectionsToggle}
+            onClick={() => this.drawItemClickHandler(1)}
           >
             {'Standort'}
           </Button>
