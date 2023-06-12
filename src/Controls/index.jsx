@@ -299,7 +299,7 @@ class MainControl extends React.Component {
               width: '8.5rem',
               fontSize: '0.85rem',
             }}
-            onClick={this.handleDirectionsToggle}
+            onClick={() => this.drawItemClickHandler(2)}
           >
             {'Empirica'}
           </Button>
