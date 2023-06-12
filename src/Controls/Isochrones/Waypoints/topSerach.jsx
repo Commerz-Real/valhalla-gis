@@ -2,21 +2,18 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
-import { Search, Form, Popup, Icon, Label, Accordion } from 'semantic-ui-react'
-import { Slider } from '@mui/material'
-
+import { Search, Popup, Icon } from 'semantic-ui-react'
 import { Settings } from '../settings'
 
 import { isValidCoordinates } from 'utils/geom'
 import {
   updateTextInput,
-  updateIsoSettings,
   fetchGeocode,
   makeIsochronesRequest,
   clearIsos,
 } from 'actions/isochronesActions'
 
-import { updatePermalink, zoomTo } from 'actions/commonActions'
+import { zoomTo } from 'actions/commonActions'
 
 import { debounce } from 'throttle-debounce'
 
@@ -99,53 +96,6 @@ class TopSearchBar extends Component {
     this.makeIsochronesRequest()
   }
 
-  handleIntervalChange = (e, { value }) => {
-    const { maxRange } = this.props.isochrones
-
-    value = isNaN(parseInt(value)) ? 0 : parseInt(value)
-    if (value > maxRange) {
-      value = maxRange
-    }
-
-    const intervalName = 'interval'
-
-    this.handleIsoSliderUpdateSettings({
-      intervalName,
-      value,
-    })
-  }
-
-  handleRangeChange = (e, { value }) => {
-    value = isNaN(parseInt(value)) ? 0 : parseInt(value)
-    if (value > 120) {
-      value = 120
-    }
-
-    const maxRangeName = 'maxRange'
-    const intervalName = 'interval'
-
-    this.handleIsoSliderUpdateSettings({
-      maxRangeName,
-      intervalName,
-      value,
-    })
-    this.makeIsochronesRequest()
-  }
-
-  handleIsoSliderUpdateSettings = ({ value, maxRangeName, intervalName }) => {
-    const { dispatch } = this.props
-    // maxRangeName can be undefined if interval is being updated
-    dispatch(
-      updateIsoSettings({
-        maxRangeName,
-        intervalName,
-        value: parseInt(value),
-      })
-    )
-
-    dispatch(updatePermalink())
-  }
-
   resultRenderer = ({ title, description }) => (
     <div className="flex-column">
       <div>
@@ -165,34 +115,7 @@ class TopSearchBar extends Component {
   )
 
   render() {
-    const { isFetching, geocodeResults, userInput, maxRange, interval } =
-      this.props.isochrones
-    const { activeIndex } = this.state
-
-    const controlSettings = {
-      maxRange: {
-        name: 'Maximum Range',
-        param: 'maxRange',
-        description: 'The maximum range in minutes',
-        unit: 'mins',
-        settings: {
-          min: 1,
-          max: 120,
-          step: 1,
-        },
-      },
-      interval: {
-        name: 'Interval Step',
-        param: 'interval',
-        description: 'The interval length in minutes.',
-        unit: 'mins',
-        settings: {
-          min: 1,
-          max: maxRange,
-          step: 1,
-        },
-      },
-    }
+    const { isFetching, geocodeResults, userInput } = this.props.isochrones
 
     return (
       <div>
@@ -228,6 +151,7 @@ class TopSearchBar extends Component {
               />
             }
           />
+          <Settings handleRemoveIsos={this.handleRemoveIsos} />
         </div>
       </div>
     )
