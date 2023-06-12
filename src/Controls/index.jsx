@@ -8,6 +8,7 @@ import DirectionsControl from './Directions'
 import IsochronesControl from './Isochrones'
 import DirectionOutputControl from './Directions/OutputControl'
 import IsochronesOutputControl from './Isochrones/OutputControl'
+import TopSearchBar from './Isochrones/Waypoints/topSerach'
 import { Segment, Tab, Button, Icon } from 'semantic-ui-react'
 import {
   updateTab,
@@ -211,6 +212,16 @@ class MainControl extends React.Component {
 
     return (
       <>
+        <div
+          style={{
+            zIndex: 1001,
+            top: '1%',
+            left: '50%',
+            position: 'absolute',
+          }}
+        >
+          <TopSearchBar />
+        </div>
         <div
           style={{
             zIndex: 1001,
