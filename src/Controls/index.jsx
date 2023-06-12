@@ -171,6 +171,19 @@ class MainControl extends React.Component {
     dispatch(toggleDirections())
   }
 
+  logInBtnClickes() {
+    toast.success('Here you can log in to your account', {
+      position: 'bottom-center',
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: 'light',
+    })
+  }
+
   render() {
     const { activeTab } = this.props
     const appPanes = [
@@ -241,7 +254,7 @@ class MainControl extends React.Component {
               left: '10px',
               position: 'absolute',
               width: '8.5rem',
-              fontSize: '1rem',
+              fontSize: '0.85rem',
             }}
             onClick={this.handleDirectionsToggle}
           >
@@ -255,7 +268,7 @@ class MainControl extends React.Component {
               left: '10px',
               position: 'absolute',
               width: '8.5rem',
-              fontSize: '1rem',
+              fontSize: '0.85rem',
             }}
             onClick={this.handleDirectionsToggle}
           >
@@ -269,11 +282,25 @@ class MainControl extends React.Component {
               left: '10px',
               position: 'absolute',
               width: '8.5rem',
-              fontSize: '1rem',
+              fontSize: '0.85rem',
             }}
             onClick={this.handleDirectionsToggle}
           >
             {'Empirica'}
+          </Button>
+          <Button
+            circular
+            icon
+            primary
+            style={{
+              zIndex: 1002,
+              top: '95%',
+              left: '36%',
+              position: 'absolute',
+            }}
+            onClick={this.logInBtnClickes}
+          >
+            <Icon name="user" />
           </Button>
         </div>
 
