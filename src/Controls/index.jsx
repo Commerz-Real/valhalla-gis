@@ -323,20 +323,22 @@ class MainControl extends React.Component {
           >
             {'Empirica'}
           </Button>
-          <Button
-            circular
-            icon
-            primary
+          
+          <div
             style={{
               zIndex: 1002,
               top: '95%',
-              left: '36%',
+              left: '28%',
               position: 'absolute',
             }}
-            onClick={this.logInBtnClickes}
           >
-            <Icon name="user" />
-          </Button>
+            <Button primary animated="vertical" onClick={this.logInBtnClickes}>
+              <Button.Content hidden>Log in</Button.Content>
+              <Button.Content visible>
+                <Icon name="user" />
+              </Button.Content>
+            </Button>
+          </div>
         </div>
 
         <Drawer
