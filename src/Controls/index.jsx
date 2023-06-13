@@ -16,6 +16,8 @@ import {
   zoomTo,
   resetSettings,
   toggleDirections,
+  toggleStandort,
+  toggleEmpirica,
 } from 'actions/commonActions'
 import { fetchReverseGeocodePerma } from 'actions/directionsActions'
 import {
@@ -38,6 +40,8 @@ class MainControl extends React.Component {
     activeDataset: PropTypes.string,
     activeTab: PropTypes.number,
     showDirectionsPanel: PropTypes.bool,
+    showStandortPanel: PropTypes.bool,
+    showEmpiricaPanel: PropTypes.bool,
     lastUpdate: PropTypes.object,
   }
 
@@ -170,6 +174,22 @@ class MainControl extends React.Component {
     dispatch(toggleDirections())
   }
 
+  handleStandortToggle = (event, data) => {
+    const { dispatch } = this.props
+    document
+      .getElementsByClassName('heightgraph-container')[0]
+      .setAttribute('width', window.innerWidth * 0.9)
+    dispatch(toggleStandort())
+  }
+
+  handleEmpiricaToggle = (event, data) => {
+    const { dispatch } = this.props
+    document
+      .getElementsByClassName('heightgraph-container')[0]
+      .setAttribute('width', window.innerWidth * 0.9)
+    dispatch(toggleEmpirica())
+  }
+
   render() {
     const { activeTab } = this.props
     const appPanes = [
@@ -246,7 +266,7 @@ class MainControl extends React.Component {
               width: '8.5rem',
               fontSize: '1rem',
             }}
-            onClick={this.handleDirectionsToggle}
+            onClick={this.handleStandortToggle}
           >
             {'Standort'}
           </Button>
@@ -260,11 +280,79 @@ class MainControl extends React.Component {
               width: '8.5rem',
               fontSize: '1rem',
             }}
-            onClick={this.handleDirectionsToggle}
+            onClick={this.handleEmpiricaToggle}
           >
             {'Empirica'}
           </Button>
         </div>
+
+        <Drawer
+          enableOverlay={false}
+          open={this.props.showStandortPanel}
+          direction="left"
+          size="400"
+          style={{
+            zIndex: 1000,
+            overflow: 'auto',
+            marginLeft: '140px',
+          }}
+        >
+          <div>
+            <Segment basic style={{ paddingBottom: 0 }}>
+              <div>Standort</div>
+            </Segment>
+          </div>
+          <div
+            style={{
+              display: 'flex',
+              justifyContent: 'flex-start',
+              margin: '1rem',
+            }}
+          >
+            Last Data Update:{' '}
+            {this.state
+              ? `${this.state.lastUpdate
+                  .toISOString()
+                  .slice(0, 10)}, ${this.state.lastUpdate
+                  .toISOString()
+                  .slice(11, 16)}`
+              : '0000-00-00, 00:00'}
+          </div>
+        </Drawer>
+
+        <Drawer
+          enableOverlay={false}
+          open={this.props.showEmpiricaPanel}
+          direction="left"
+          size="400"
+          style={{
+            zIndex: 1000,
+            overflow: 'auto',
+            marginLeft: '140px',
+          }}
+        >
+          <div>
+            <Segment basic style={{ paddingBottom: 0 }}>
+              <div>Empirica</div>
+            </Segment>
+          </div>
+          <div
+            style={{
+              display: 'flex',
+              justifyContent: 'flex-start',
+              margin: '1rem',
+            }}
+          >
+            Last Data Update:{' '}
+            {this.state
+              ? `${this.state.lastUpdate
+                  .toISOString()
+                  .slice(0, 10)}, ${this.state.lastUpdate
+                  .toISOString()
+                  .slice(11, 16)}`
+              : '0000-00-00, 00:00'}
+          </div>
+        </Drawer>
 
         <Drawer
           enableOverlay={false}
@@ -319,11 +407,19 @@ class MainControl extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  const { message, activeTab, showDirectionsPanel } = state.common
+  const {
+    message,
+    activeTab,
+    showDirectionsPanel,
+    showStandortPanel,
+    showEmpiricaPanel,
+  } = state.common
   return {
     message,
     activeTab,
     showDirectionsPanel,
+    showStandortPanel,
+    showEmpiricaPanel,
   }
 }
 

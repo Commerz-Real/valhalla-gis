@@ -8,6 +8,8 @@ import {
   ZOOM_TO,
   RESET_SETTINGS,
   TOGGLE_DIRECTIONS,
+  TOGGLE_STANDORT,
+  TOGGLE_EMPIRICA,
 } from './types'
 
 import {
@@ -49,6 +51,14 @@ export const doShowSettings = () => ({
 
 export const toggleDirections = () => ({
   type: TOGGLE_DIRECTIONS,
+})
+
+export const toggleStandort = () => ({
+  type: TOGGLE_STANDORT,
+})
+
+export const toggleEmpirica = () => ({
+  type: TOGGLE_EMPIRICA,
 })
 
 export const resetSettings = () => ({

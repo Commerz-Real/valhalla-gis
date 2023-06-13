@@ -8,6 +8,8 @@ import {
   ZOOM_TO,
   RESET_SETTINGS,
   TOGGLE_DIRECTIONS,
+  TOGGLE_STANDORT,
+  TOGGLE_EMPIRICA,
 } from 'actions/types'
 import {
   settingsInit,
@@ -18,6 +20,8 @@ const initialState = {
   activeTab: 0,
   showSettings: false,
   showDirectionsPanel: true,
+  showStandortPanel: false,
+  showEmpiricaPanel: false,
   coordinates: [],
   loading: false,
   message: {
@@ -64,6 +68,26 @@ export const common = (state = initialState, action) => {
       return {
         ...state,
         showDirectionsPanel: !state.showDirectionsPanel,
+        showStandortPanel: false,
+        showEmpiricaPanel: false,
+      }
+    }
+
+    case TOGGLE_STANDORT: {
+      return {
+        ...state,
+        showStandortPanel: !state.showStandortPanel,
+        showDirectionsPanel: false,
+        showEmpiricaPanel: false,
+      }
+    }
+
+    case TOGGLE_EMPIRICA: {
+      return {
+        ...state,
+        showEmpiricaPanel: !state.showEmpiricaPanel,
+        showDirectionsPanel: false,
+        showStandortPanel: false,
       }
     }
 

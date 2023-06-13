@@ -122,6 +122,8 @@ class Map extends React.Component {
     showRestrictions: PropTypes.object,
     coordinates: PropTypes.array,
     showDirectionsPanel: PropTypes.bool,
+    showStandortPanel: PropTypes.bool,
+    showEmpiricaPanel: PropTypes.bool,
     showSettings: PropTypes.bool,
   }
 
@@ -1078,6 +1080,8 @@ const mapStateToProps = (state) => {
     activeDataset,
     coordinates,
     showDirectionsPanel,
+    showStandortPanel,
+    showEmpiricaPanel,
     showSettings,
   } = common
   return {
@@ -1089,6 +1093,8 @@ const mapStateToProps = (state) => {
     activeDataset,
     showRestrictions,
     showDirectionsPanel,
+    showStandortPanel,
+    showEmpiricaPanel,
     showSettings,
   }
 }
