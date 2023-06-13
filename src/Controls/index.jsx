@@ -8,6 +8,7 @@ import DirectionsControl from './Directions'
 import IsochronesControl from './Isochrones'
 import DirectionOutputControl from './Directions/OutputControl'
 import IsochronesOutputControl from './Isochrones/OutputControl'
+import TopSearchBar from './Isochrones/Waypoints/topSerach'
 import { Segment, Tab, Button, Icon } from 'semantic-ui-react'
 import {
   updateTab,
@@ -190,6 +191,34 @@ class MainControl extends React.Component {
     dispatch(toggleEmpirica())
   }
 
+  // Shows a toast to verify click on log in
+  logInBtnClickes() {
+    toast.success('Here you can log in to your account', {
+      position: 'bottom-center',
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: 'light',
+    })
+  }
+
+  // Handles click on Drawer item
+  // @Param: 0 = "Erreichbarkeit"; 1 = "Standort"; 2 = "Empirica"
+  drawItemClickHandler = (item) => {
+    switch (item) {
+      case 0:
+        this.handleDirectionsToggle()
+        break
+      case 1:
+        break
+      case 2:
+        break
+    }
+  }
+
   render() {
     const { activeTab } = this.props
     const appPanes = [
@@ -234,6 +263,16 @@ class MainControl extends React.Component {
         <div
           style={{
             zIndex: 1001,
+            top: '1%',
+            left: '50%',
+            position: 'absolute',
+          }}
+        >
+          <TopSearchBar />
+        </div>
+        <div
+          style={{
+            zIndex: 1001,
             top: '0px',
             left: '0px',
             width: '140px',
@@ -250,9 +289,9 @@ class MainControl extends React.Component {
               left: '10px',
               position: 'absolute',
               width: '8.5rem',
-              fontSize: '1rem',
+              fontSize: '0.85rem',
             }}
-            onClick={this.handleDirectionsToggle}
+            onClick={() => this.drawItemClickHandler(0)}
           >
             {'Erreichbarkeit'}
           </Button>
@@ -264,7 +303,7 @@ class MainControl extends React.Component {
               left: '10px',
               position: 'absolute',
               width: '8.5rem',
-              fontSize: '1rem',
+              fontSize: '0.85rem',
             }}
             onClick={this.handleStandortToggle}
           >
@@ -278,11 +317,25 @@ class MainControl extends React.Component {
               left: '10px',
               position: 'absolute',
               width: '8.5rem',
-              fontSize: '1rem',
+              fontSize: '0.85rem',
             }}
             onClick={this.handleEmpiricaToggle}
           >
             {'Empirica'}
+          </Button>
+          <Button
+            circular
+            icon
+            primary
+            style={{
+              zIndex: 1002,
+              top: '95%',
+              left: '36%',
+              position: 'absolute',
+            }}
+            onClick={this.logInBtnClickes}
+          >
+            <Icon name="user" />
           </Button>
         </div>
 
