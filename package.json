@@ -13,7 +13,6 @@
     "date-fns": "^2.29.3",
     "jquery-ui-bundle": "^1.12.1-migrate",
     "json-format": "^1.0.1",
-    "leaflet": "^1.9.3",
     "leaflet-extra-markers": "^1.2.1",
     "leaflet.heightgraph": "^1.4.0",
     "prop-types": "^15.8.1",
@@ -86,6 +85,8 @@
     "eslint-plugin-react": "^7.13.0",
     "gh-pages": "^4.0.0",
     "husky": "^8.0.2",
+    "leaflet": "^1.9.4",
+    "leaflet.markercluster": "^1.5.3",
     "lint-staged": "^13.0.3",
     "prettier": "^2.7.1",
     "redux-devtools-extension": "^2.13.8"

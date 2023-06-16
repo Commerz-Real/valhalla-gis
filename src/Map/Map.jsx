@@ -2,6 +2,9 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import { connect } from 'react-redux'
 import L from 'leaflet'
+import 'leaflet.markercluster'
+import 'leaflet.markercluster/dist/MarkerCluster.css'
+import 'leaflet.markercluster/dist/MarkerCluster.Default.css'
 import * as $ from 'jquery'
 import 'jquery-ui-bundle'
 import 'jquery-ui-bundle/jquery-ui.css'
@@ -60,6 +63,7 @@ const routeLineStringLayer = L.featureGroup()
 const highlightRouteSegmentlayer = L.featureGroup()
 const highlightRouteIndexLayer = L.featureGroup()
 const excludePolygonsLayer = L.featureGroup()
+const empiricaLayer = L.markerClusterGroup()
 
 const centerCoords = [51.165691, 10.451526]
 let center = [parseFloat(centerCoords[0]), parseFloat(centerCoords[1])]
@@ -84,6 +88,8 @@ const maxBounds = maxBoundsString
 // a leaflet map consumes parameters, I'd say they are quite self-explanatory
 const mapParams = {
   center,
+  renderer: L.canvas(),
+  preferCanvas: true,
   maxBounds,
   maxBoundsViscosity: 1.0,
   zoomControl: false,
@@ -99,6 +105,7 @@ const mapParams = {
     highlightRouteSegmentlayer,
     highlightRouteIndexLayer,
     excludePolygonsLayer,
+    empiricaLayer,
     OSMTiles,
   ],
 }
@@ -159,6 +166,7 @@ class Map extends React.Component {
       'Isochrone Center': isoCenterLayer,
       Routes: routeLineStringLayer,
       Isochrones: isoPolygonLayer,
+      Empirica: empiricaLayer,
     }
 
     this.layerControl = L.control.layers(baseMaps, overlayMaps).addTo(this.map)
@@ -333,6 +341,9 @@ class Map extends React.Component {
         hg.resize(ui.size)
       },
     })
+    document
+      .getElementById('empirica')
+      .addEventListener('click', this.getEmpiricaDaten)
 
     // this.map.on('moveend', () => {
     //   dispatch(doUpdateBoundingBox(this.map.getBounds()))
@@ -832,6 +843,44 @@ class Map extends React.Component {
     const zoom = map.getZoom()
     const osmURL = `https://www.openstreetmap.org/#map=${zoom}/${lat}/${lng}`
     window.open(osmURL, '_blank')
+  }
+
+  getEmpiricaDaten = () => {
+    // get JSON data from /workspaces/valhalla-gis/src/Data/Empirica/Angebote_empirica.json and store in const data
+    const data = require('../Data/Empirica/Angebote_empirica.json')
+    const features = data.features
+    for (const feature of features) {
+      const marker = L.marker([
+        feature.geometry.coordinates[1],
+        feature.geometry.coordinates[0],
+      ]).bindPopup(
+        '<b>' +
+          'Anzeige ID: ' +
+          feature.properties.angebot_id +
+          '</b><br>' +
+          'Kosten Miete gesamt: ' +
+          feature.properties.kstn_miete_gesamt +
+          '<br><br>' +
+          'Adresse: ' +
+          feature.properties.oadr_strasse +
+          '<br>' +
+          feature.properties.oadr_ortsteil +
+          ' ' +
+          feature.properties.oadr_ort +
+          '<br><br>' +
+          '<a href="' +
+          feature.properties.web +
+          '" target="_blank">Zur Website</a><br>' +
+          '<a href="' +
+          feature.properties.mail +
+          '">Mail schreiben</a><br>' +
+          '<a href="' +
+          feature.properties.tel +
+          '">Anrufen</a>'
+      )
+      empiricaLayer.addLayer(marker)
+    }
+    empiricaLayer.addTo(this.map)
   }
 
   render() {

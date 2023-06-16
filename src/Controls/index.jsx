@@ -25,6 +25,7 @@ import {
   fetchReverseGeocodeIso,
   updateIsoSettings,
 } from 'actions/isochronesActions'
+ import Empirica from './Empirica'
 
 const pairwise = (arr, func) => {
   let cnt = 0
@@ -296,6 +297,7 @@ class MainControl extends React.Component {
             {'Standort'}
           </Button>
           <Button
+            id="empirica"
             primary
             style={{
               zIndex: 1002,
@@ -309,22 +311,20 @@ class MainControl extends React.Component {
           >
             {'Empirica'}
           </Button>
-          
-          <div
+          <Button
+            circular
+            icon
+            primary
             style={{
               zIndex: 1002,
               top: '95%',
-              left: '28%',
+              left: '36%',
               position: 'absolute',
             }}
+            onClick={this.logInBtnClickes}
           >
-            <Button primary animated="vertical" onClick={this.logInBtnClickes}>
-              <Button.Content hidden>Log in</Button.Content>
-              <Button.Content visible>
-                <Icon name="user" />
-              </Button.Content>
-            </Button>
-          </div>
+            <Icon name="user" />
+          </Button>
         </div>
 
         <Drawer
@@ -370,11 +370,12 @@ class MainControl extends React.Component {
             zIndex: 1000,
             overflow: 'auto',
             marginLeft: '140px',
+            width: '20%',
           }}
         >
           <div>
             <Segment basic style={{ paddingBottom: 0 }}>
-              <div>Empirica</div>
+              <Empirica />
             </Segment>
           </div>
           <div
