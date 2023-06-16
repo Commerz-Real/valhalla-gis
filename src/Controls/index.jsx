@@ -25,7 +25,7 @@ import {
   fetchReverseGeocodeIso,
   updateIsoSettings,
 } from 'actions/isochronesActions'
- import Empirica from './Empirica'
+import Empirica from './Empirica'
 
 const pairwise = (arr, func) => {
   let cnt = 0

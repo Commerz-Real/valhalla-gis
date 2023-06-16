@@ -846,14 +846,22 @@ class Map extends React.Component {
   }
 
   getEmpiricaDaten = () => {
+    empiricaLayer.clearLayers()
     // get JSON data from /workspaces/valhalla-gis/src/Data/Empirica/Angebote_empirica.json and store in const data
     const data = require('../Data/Empirica/Angebote_empirica.json')
     const features = data.features
+    const empMarker = ExtraMarkers.icon({
+      icon: 'fa',
+      markerColor: 'green',
+      prefix: 'fa',
+    })
     for (const feature of features) {
-      const marker = L.marker([
-        feature.geometry.coordinates[1],
-        feature.geometry.coordinates[0],
-      ]).bindPopup(
+      const marker = L.marker(
+        [feature.geometry.coordinates[1], feature.geometry.coordinates[0]],
+        {
+          icon: empMarker,
+        }
+      ).bindPopup(
         '<b>' +
           'Anzeige ID: ' +
           feature.properties.angebot_id +
