@@ -341,6 +341,8 @@ class Map extends React.Component {
         hg.resize(ui.size)
       },
     })
+
+    empiricaLayer.remove()
     document
       .getElementById('empiricaAnzeigen')
       .addEventListener('click', this.getEmpiricaDaten)
@@ -846,7 +848,6 @@ class Map extends React.Component {
   }
 
   getEmpiricaDaten = () => {
-    empiricaLayer.clearLayers()
     // get JSON data from /workspaces/valhalla-gis/src/Data/Empirica/Angebote_empirica.json and store in const data
     const data = require('../Data/Empirica/Angebote_empirica.json')
     const features = data.features
@@ -888,7 +889,11 @@ class Map extends React.Component {
       )
       empiricaLayer.addLayer(marker)
     }
-    empiricaLayer.addTo(this.map)
+    if (!this.map.hasLayer(empiricaLayer)) {
+      empiricaLayer.addTo(this.map)
+    } else {
+      empiricaLayer.remove()
+    }
   }
 
   render() {
