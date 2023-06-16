@@ -40,7 +40,7 @@ class Empirica extends React.Component {
           <div>
             <div className="pa2 flex flex-row justify-between">
               <div className="ui toggle checkbox">
-                <input type="checkbox" name="public" />
+                <input type="checkbox" name="public" id="empiricaAnzeigen" />
                 <label
                   style={{
                     fontSize: '1em',

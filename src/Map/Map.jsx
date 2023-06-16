@@ -342,7 +342,7 @@ class Map extends React.Component {
       },
     })
     document
-      .getElementById('empirica')
+      .getElementById('empiricaAnzeigen')
       .addEventListener('click', this.getEmpiricaDaten)
 
     // this.map.on('moveend', () => {
