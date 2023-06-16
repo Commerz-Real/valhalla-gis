@@ -848,6 +848,7 @@ class Map extends React.Component {
   }
 
   getEmpiricaDaten = () => {
+    empiricaLayer.clearLayers()
     // get JSON data from /workspaces/valhalla-gis/src/Data/Empirica/Angebote_empirica.json and store in const data
     const data = require('../Data/Empirica/Angebote_empirica.json')
     const features = data.features
