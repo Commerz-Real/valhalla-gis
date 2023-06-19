@@ -1,10 +1,24 @@
 import React from 'react'
-import { Divider, Dropdown } from 'semantic-ui-react'
+import { Input, Checkbox, Divider, Dropdown } from 'semantic-ui-react'
+import { DateInput } from 'semantic-ui-calendar-react'
 
 class Empirica extends React.Component {
   state = {
     method: '',
     inputValue: 0,
+    baujahr: 0,
+    flaeche: 0,
+    kaltmiete: 0,
+    startDate: '',
+    endDate: '',
+  }
+
+  handleStartDateChange = (event, { value }) => {
+    this.setState({ startDate: value })
+  }
+
+  handleEndDateChange = (event, { value }) => {
+    this.setState({ endDate: value })
   }
 
   handleDropdownChange = (event, data) => {
@@ -16,16 +30,19 @@ class Empirica extends React.Component {
     this.setState({ inputValue })
   }
 
-  handleIncrement = () => {
-    this.setState((prevState) => ({
-      inputValue: prevState.inputValue + 1,
-    }))
+  handleBaujahrChange = (event) => {
+    const baujahr = event.target.value.replace(/[^0-9]/g, '')
+    this.setState({ baujahr })
   }
 
-  handleDecrement = () => {
-    this.setState((prevState) => ({
-      inputValue: Math.max(prevState.inputValue - 1, 0),
-    }))
+  handleFlaecheChange = (event) => {
+    const flaeche = event.target.value.replace(/[^0-9]/g, '')
+    this.setState({ flaeche })
+  }
+
+  handleKaltmieteChange = (event) => {
+    const kaltmiete = event.target.value.replace(/[^0-9]/g, '')
+    this.setState({ kaltmiete })
   }
 
   render() {
@@ -39,41 +56,80 @@ class Empirica extends React.Component {
         <div className="flex flex-column content-between">
           <div>
             <div className="pa2 flex flex-row justify-between">
-              <div className="ui toggle checkbox">
-                <input type="checkbox" name="public" id="empiricaAnzeigen" />
-                <label
-                  style={{
-                    fontSize: '1em',
-                  }}
-                >
-                  Empirica
-                </label>
-              </div>
+              <Checkbox toggle id="empiricaAnzeigen" />
+              <label
+                style={{
+                  fontSize: '1em',
+                }}
+              >
+                Empirica
+              </label>
             </div>
             <Divider fitted />
-            <div className="flex flex-wrap justify-between">
-              <Dropdown
-                selection
-                className="ui selection dropdown"
-                options={options}
-                onChange={this.handleDropdownChange}
-                placeholder="Miete oder Kauf"
-              />
-              <br />
-              <div className="ui container">
-                <div className="input-container">
-                  <input
-                    type="text"
-                    value={this.state.inputValue}
-                    onChange={this.handleInputChange}
-                  />
-                  <div className="input-controls">
-                    <button onClick={this.handleIncrement}>+</button>
-                    <button onClick={this.handleDecrement}>-</button>
-                  </div>
-                </div>
-              </div>
-            </div>
+            <br />
+            <Dropdown
+              selection
+              className="ui selection dropdown"
+              options={options}
+              onChange={this.handleDropdownChange}
+              placeholder="Miete oder Kauf"
+            />
+            <br />
+            <br />
+            <label>Umkreissuche</label>
+            <br />
+            <Input
+              value={this.state.inputValue}
+              onChange={this.handleInputChange}
+              type="number"
+            />
+            <br />
+            <DateInput
+              name="startDate"
+              placeholder="Startdatum"
+              value={this.state.startDate}
+              iconPosition="left"
+              onChange={this.handleStartDateChange}
+            />
+            <DateInput
+              name="endDate"
+              placeholder="Enddatum"
+              value={this.state.endDate}
+              iconPosition="left"
+              onChange={this.handleEndDateChange}
+            />
+            <br />
+            <label>Baujahr</label>
+            <br />
+            <Input
+              value={this.state.baujahr}
+              onChange={this.handleBaujahrChange}
+              type="number"
+              min="1900"
+              max="2027"
+              defaultValue="2023"
+            />
+            <br />
+            <label>Fläche</label>
+            <br />
+            <Input
+              value={this.state.flaeche}
+              onChange={this.handleFlaecheChange}
+              type="number"
+              min="0"
+              max="200"
+            />
+            <br />
+            <label>Kaltmiete pro m^2</label>
+            <br />
+            <Input
+              value={this.state.kaltmiete}
+              onChange={this.handleKaltmieteChange}
+              type="number"
+              min="0"
+              max="20"
+            />
+            <br />
           </div>
         </div>
       </React.Fragment>
